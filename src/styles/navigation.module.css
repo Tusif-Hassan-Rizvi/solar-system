@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo:wght@500&display=swap");
+.NavigationLink {
+  color: white;
+  position: relative;
+  z-index: 2;
+  font-family: "Exo", sans-serif;
+}
+
+.UlTag {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.UlTag li {
+  margin: 5px 20px;
+}
+
+.hamnav {
+  display: none;
+}
+
+@media only screen and (max-width: 1200px) {
+  .NavigationLink {
+    display: none;
+  }
+  .hamnav {
+    display: block;
+  }
+}
