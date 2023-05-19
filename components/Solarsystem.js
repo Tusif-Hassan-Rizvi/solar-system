@@ -2,36 +2,17 @@ import React from "react";
 import { useEffect, useRef } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { LightProbeHelper } from "three/addons/helpers/LightProbeHelper.js";
+import Stats from "three/examples/jsm/libs/stats.module";
 import gsap from "gsap";
 import * as THREE from "three";
 
 export default function Solarsystem(props) {
   const canvasRef = useRef();
-  const mediaQuery = typeof window !== 'undefined' && window.matchMedia("(max-width: 500px)");
+  const mediaQuery =
+    typeof window !== "undefined" && window.matchMedia("(max-width: 500px)");
   useEffect(() => {
     // create a scene
     const scene = new THREE.Scene();
-    console.log("this is mediaqurry", mediaQuery)
-
-    // create a sphere Moon
-    const geometry = new THREE.SphereGeometry(mediaQuery.matches ? 3 : 5, 64, 64);
-    const material = new THREE.MeshStandardMaterial({
-      // color: "#00ff83",
-      roughness: 0.6,
-      map: new THREE.TextureLoader().load(props.imageurl),
-    });
-    const sphere = new THREE.Mesh(geometry, material);
-    scene.add(sphere);
-
-    // size
-    const sizes = {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-
-    // add background on scece
-    const spaceTexture = new THREE.TextureLoader().load("./Space.jpg");
-    scene.background = spaceTexture;
 
     //light
     // ambient light
@@ -50,6 +31,30 @@ export default function Solarsystem(props) {
     //   sphereSize
     // );
     // scene.add(pointLightHelper);
+
+    // create a sphere Moon
+    const geometry = new THREE.SphereGeometry(
+      mediaQuery.matches ? 3 : 5,
+      64,
+      64
+    );
+    const material = new THREE.MeshStandardMaterial({
+      // color: "#00ff83",
+      roughness: 0.6,
+      map: new THREE.TextureLoader().load(props.imageurl),
+    });
+    const sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+
+    // size
+    const sizes = {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+
+    // add background on scece
+    const spaceTexture = new THREE.TextureLoader().load("./Space.jpg");
+    scene.background = spaceTexture;
 
     //camera
     const camera = new THREE.PerspectiveCamera(
@@ -76,6 +81,11 @@ export default function Solarsystem(props) {
     controls.autoRotate = true;
     controls.autoRotateSpeed = 3;
 
+    //stats
+    const stats = Stats();
+    document.body.appendChild(stats.dom);
+    console.log(window.document.body)
+    console.log("this is stats", stats.dom.clientTop)
     //Resize
     window.addEventListener("resize", () => {
       sizes.width = window.innerWidth;
@@ -89,7 +99,10 @@ export default function Solarsystem(props) {
 
     // creating a loop
     const loop = () => {
+      // updating controls on every frame
       controls.update();
+      // updating stats on every frame
+      stats.update();
       renderer.render(scene, camera);
       window.requestAnimationFrame(loop);
     };
