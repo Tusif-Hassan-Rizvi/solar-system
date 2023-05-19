@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useRef } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { LightProbeHelper } from "three/addons/helpers/LightProbeHelper.js";
+import {TeapotGeometry} from 'three/examples/jsm/geometries/TeapotGeometry'
 import Stats from "three/examples/jsm/libs/stats.module";
 import gsap from "gsap";
 import * as THREE from "three";
@@ -41,10 +42,31 @@ export default function Solarsystem(props) {
     const material = new THREE.MeshStandardMaterial({
       // color: "#00ff83",
       roughness: 0.6,
+      // wireframe:true,
       map: new THREE.TextureLoader().load(props.imageurl),
     });
     const sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
+
+
+    //add a another gemetry on the screen
+    // const cubeGemotry=new THREE.BoxGeometry( 5, 5, 5 )
+    // const cubeMaterial=new THREE.MeshBasicMaterial( {color: 0x00ff00}, );
+    // const cubebox= new THREE.Mesh( cubeGemotry, cubeMaterial );
+    // cubebox.position.x=+10;
+    // scene.add(cubebox)
+
+
+    // teaport geometry 
+    const teaportGeometry=new TeapotGeometry(1, 16);
+    const teaportMaterial=new THREE.MeshNormalMaterial(
+      {
+        wireframe:true
+      }
+    )
+    const teaportMesh=new THREE.Mesh(teaportGeometry, teaportMaterial);
+    teaportMesh.position.x=+10;
+    scene.add(teaportMesh)
 
     // size
     const sizes = {
@@ -78,14 +100,18 @@ export default function Solarsystem(props) {
     controls.enableDamping = true;
     controls.enablePan = false; //true/false
     controls.enableZoom = true;
-    controls.autoRotate = true;
+    controls.autoRotate = false;
     controls.autoRotateSpeed = 3;
 
     //stats
     const stats = Stats();
     document.body.appendChild(stats.dom);
-    console.log(window.document.body)
-    console.log("this is stats", stats.dom.clientTop)
+
+    for(let i=0; i<stats.dom.children.length; i++){
+      stats.dom.children[i].style.position="absolute";
+      stats.dom.children[i].style.top="100px"; 
+    }
+
     //Resize
     window.addEventListener("resize", () => {
       sizes.width = window.innerWidth;
