@@ -2,7 +2,8 @@ import React from "react";
 import { useEffect, useRef } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { LightProbeHelper } from "three/addons/helpers/LightProbeHelper.js";
-import {TeapotGeometry} from 'three/examples/jsm/geometries/TeapotGeometry'
+import { TeapotGeometry } from "three/examples/jsm/geometries/TeapotGeometry";
+import * as dat from 'dat.gui'
 import Stats from "three/examples/jsm/libs/stats.module";
 import gsap from "gsap";
 import * as THREE from "three";
@@ -48,6 +49,16 @@ export default function Solarsystem(props) {
     const sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
 
+    //initializing data.gui
+    const gui = new dat.GUI();
+   
+    console.log(gui.__ul.style)
+    
+   
+
+
+    // use gui with mesh 
+    gui.add(sphere.rotation,'x', 0, Math.PI, ).name('Rotation X Axis');
 
     //add a another gemetry on the screen
     // const cubeGemotry=new THREE.BoxGeometry( 5, 5, 5 )
@@ -56,17 +67,16 @@ export default function Solarsystem(props) {
     // cubebox.position.x=+10;
     // scene.add(cubebox)
 
-
-    // teaport geometry 
-    const teaportGeometry=new TeapotGeometry(1, 16);
-    const teaportMaterial=new THREE.MeshNormalMaterial(
-      {
-        wireframe:true
-      }
-    )
-    const teaportMesh=new THREE.Mesh(teaportGeometry, teaportMaterial);
-    teaportMesh.position.x=+10;
-    scene.add(teaportMesh)
+    // teaport geometry
+    // const teaportGeometry=new TeapotGeometry(1, 16);
+    // const teaportMaterial=new THREE.MeshNormalMaterial(
+    //   {
+    //     wireframe:true
+    //   }
+    // )
+    // const teaportMesh=new THREE.Mesh(teaportGeometry, teaportMaterial);
+    // teaportMesh.position.x=+10;
+    // scene.add(teaportMesh)
 
     // size
     const sizes = {
@@ -107,9 +117,9 @@ export default function Solarsystem(props) {
     const stats = Stats();
     document.body.appendChild(stats.dom);
 
-    for(let i=0; i<stats.dom.children.length; i++){
-      stats.dom.children[i].style.position="absolute";
-      stats.dom.children[i].style.top="100px"; 
+    for (let i = 0; i < stats.dom.children.length; i++) {
+      stats.dom.children[i].style.position = "absolute";
+      stats.dom.children[i].style.top = "100px";
     }
 
     //Resize
