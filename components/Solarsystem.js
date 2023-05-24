@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { LightProbeHelper } from "three/addons/helpers/LightProbeHelper.js";
 import { TeapotGeometry } from "three/examples/jsm/geometries/TeapotGeometry";
-import * as dat from 'dat.gui'
+// import * as dat from "dat.gui";
 import Stats from "three/examples/jsm/libs/stats.module";
 import gsap from "gsap";
 import * as THREE from "three";
@@ -48,17 +48,6 @@ export default function Solarsystem(props) {
     });
     const sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
-
-    //initializing data.gui
-    const gui = new dat.GUI();
-   
-    console.log(gui.__ul.style)
-    
-   
-
-
-    // use gui with mesh 
-    gui.add(sphere.rotation,'x', 0, Math.PI, ).name('Rotation X Axis');
 
     //add a another gemetry on the screen
     // const cubeGemotry=new THREE.BoxGeometry( 5, 5, 5 )
@@ -121,6 +110,15 @@ export default function Solarsystem(props) {
       stats.dom.children[i].style.position = "absolute";
       stats.dom.children[i].style.top = "100px";
     }
+    
+    //initializing dat.gui
+    import("dat.gui").then((dat) => {
+      const gui = new dat.GUI();
+      // use gui with mesh
+      gui.add(sphere.rotation, "x", 0, Math.PI).name("Rotation X Axis");
+      gui.add(sphere.rotation, "y", 0, Math.PI).name("Rotation y Axis");
+      gui.add(sphere.rotation, "z", 0, Math.PI).name("Rotation z Axis");
+    });
 
     //Resize
     window.addEventListener("resize", () => {
