@@ -99,8 +99,8 @@ export default function Solarsystem(props) {
     controls.enableDamping = true;
     controls.enablePan = false; //true/false
     controls.enableZoom = true;
-    controls.autoRotate = false;
-    controls.autoRotateSpeed = 3;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1;
 
     //stats
     // const stats = Stats();
@@ -136,7 +136,7 @@ export default function Solarsystem(props) {
       // updating controls on every frame
       controls.update();
       // updating stats on every frame
-      stats.update();
+      // stats.update();
       renderer.render(scene, camera);
       window.requestAnimationFrame(loop);
     };
