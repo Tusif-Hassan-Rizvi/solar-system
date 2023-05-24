@@ -103,22 +103,22 @@ export default function Solarsystem(props) {
     controls.autoRotateSpeed = 3;
 
     //stats
-    const stats = Stats();
-    document.body.appendChild(stats.dom);
+    // const stats = Stats();
+    // document.body.appendChild(stats.dom);
 
-    for (let i = 0; i < stats.dom.children.length; i++) {
-      stats.dom.children[i].style.position = "absolute";
-      stats.dom.children[i].style.top = "100px";
-    }
+    // for (let i = 0; i < stats.dom.children.length; i++) {
+    //   stats.dom.children[i].style.position = "absolute";
+    //   stats.dom.children[i].style.top = "100px";
+    // }
     
-    //initializing dat.gui
-    import("dat.gui").then((dat) => {
-      const gui = new dat.GUI();
-      // use gui with mesh
-      gui.add(sphere.rotation, "x", 0, Math.PI).name("Rotation X Axis");
-      gui.add(sphere.rotation, "y", 0, Math.PI).name("Rotation y Axis");
-      gui.add(sphere.rotation, "z", 0, Math.PI).name("Rotation z Axis");
-    });
+    // //initializing dat.gui
+    // import("dat.gui").then((dat) => {
+    //   const gui = new dat.GUI();
+    //   // use gui with mesh
+    //   gui.add(sphere.rotation, "x", 0, Math.PI).name("Rotation X Axis");
+    //   gui.add(sphere.rotation, "y", 0, Math.PI).name("Rotation y Axis");
+    //   gui.add(sphere.rotation, "z", 0, Math.PI).name("Rotation z Axis");
+    // });
 
     //Resize
     window.addEventListener("resize", () => {
