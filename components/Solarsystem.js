@@ -4,6 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { LightProbeHelper } from "three/addons/helpers/LightProbeHelper.js";
 import { TeapotGeometry } from "three/examples/jsm/geometries/TeapotGeometry";
 // import * as dat from "dat.gui";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import Stats from "three/examples/jsm/libs/stats.module";
 import gsap from "gsap";
 import * as THREE from "three";
@@ -34,6 +35,15 @@ export default function Solarsystem(props) {
     // );
     // scene.add(pointLightHelper);
 
+    // load 3d model on scene
+    // const fbxloader = new FBXLoader();
+    // fbxloader.load("./Room.fbx", (fbxscene) => {
+    //   fbxscene.rotation.y=Math.PI/8;
+    //   fbxscene.position.y=3;
+    //   fbxscene.scale.set(5, 5, 5);
+    //   scene.add(fbxscene);
+    // });
+
     // create a sphere Moon
     const geometry = new THREE.SphereGeometry(
       mediaQuery.matches ? 3 : 5,
@@ -49,12 +59,16 @@ export default function Solarsystem(props) {
     const sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
 
-    //add a another gemetry on the screen
-    // const cubeGemotry=new THREE.BoxGeometry( 5, 5, 5 )
-    // const cubeMaterial=new THREE.MeshBasicMaterial( {color: 0x00ff00}, );
-    // const cubebox= new THREE.Mesh( cubeGemotry, cubeMaterial );
-    // cubebox.position.x=+10;
-    // scene.add(cubebox)
+    // //add a another gemetry on the screen
+    // const cubeGemotry = new THREE.BoxGeometry(5, 5, 5);
+    // const cubeMaterial = new THREE.MeshStandardMaterial({
+    //   // color: 0x00ff00,
+    //   roughness: 1,
+    //   map: new THREE.TextureLoader().load(props.imageurl),
+    // });
+    // const cubebox = new THREE.Mesh(cubeGemotry, cubeMaterial);
+    // cubebox.position.x = +10;
+    // scene.add(cubebox);
 
     // teaport geometry
     // const teaportGeometry=new TeapotGeometry(1, 16);
@@ -110,7 +124,7 @@ export default function Solarsystem(props) {
       stats.dom.children[i].style.position = "absolute";
       stats.dom.children[i].style.top = "100px";
     }
-    
+
     //initializing dat.gui
     import("dat.gui").then((dat) => {
       const gui = new dat.GUI();
